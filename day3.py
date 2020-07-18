@@ -18,6 +18,7 @@ node = Node('root', Node('left', Node('left.left')), Node('right'))
 assert deserialize(serialize(node)).left.left.val == 'left.left'
 
 '''
+from collections import deque
 
 class Node:
 	def __init__(self, val, left=None, right=None):
@@ -25,6 +26,36 @@ class Node:
 		self.left = left
 		self.right = right
 
-		
-# node = Node('root', Node('left', Node('left.left')), Node('right'))
-# assert deserialize(serialize(node)).left.left.val == 'left.left'
+def	serialize(node):
+	if node == None:
+		return 'X'
+
+	serialized_left = serialize(node.left)
+	serialized_right = serialize(node.right)
+
+	return node.val + ',' + serialized_left + ',' + serialized_right
+
+def deserialize(string):
+	# Initializing the queue
+	# Adding tree elements to queue
+	queue = deque(string.split(','))
+
+	# Process the queue in a separate function
+	return deserialize_helper(queue)
+
+def deserialize_helper(queue):
+	# Pop the next node from the front of the queue
+	current_node = queue.popleft()
+	# If the current node is 'X' that means it is equivalent to NULL
+	if current_node == 'X':
+		return None
+
+	# Make a new node with the node next in the queue
+	new_node = Node(current_node)
+	new_node.left = deserialize_helper(queue)
+	new_node.right = deserialize_helper(queue)
+
+	return new_node
+
+node = Node('root', Node('left', Node('left.left')), Node('right'))
+assert deserialize(serialize(node)).left.left.val == 'left.left'
