@@ -1,5 +1,6 @@
 #include <iostream>
 
+// Good Reference: https://stackoverflow.com/questions/51599273/xor-linked-list-with-c
 class Node {
 	public:
 		Node(int new_data, Node* prev, Node* next): data(new_data), npx(XOR(prev, next)) {}
