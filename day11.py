@@ -25,11 +25,17 @@ def buildHashTable(q):
             curr_str += word[i]
             matches_set = findMatches(curr_str, q)
             hash_table[curr_str] = matches_set
-            
+
     return hash_table
 
 def autoComplete(s, q):
     hash_table = buildHashTable(q)
-    return hash_table[s]
+    value = hash_table.get(s)
+    if value == None:
+        return set()
+    return value
 
-print(autoComplete('de', ['dog', 'deer', 'deal']))
+assert autoComplete("de", ["dog", "deer", "deal"]) == set(["deer", "deal"])
+assert autoComplete("ca", ["cat", "car", "cer"]) == set(["cat", "car"])
+assert autoComplete("ae", ["cat", "car", "cer"]) == set([])
+assert autoComplete("ae", []) == set([])
