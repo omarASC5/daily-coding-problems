@@ -19,4 +19,7 @@ def findAllSteps(N, X):
 
     return all_subsets
 
-print(findAllSteps(25, [1, 2]))
+assert findAllSteps(4, [1, 2]) == \
+    [[1, 1, 1, 1], [1, 1, 2], [1, 2, 1], [2, 1, 1], [2, 2]]
+assert findAllSteps(4, [1, 2, 3]) == \
+    [[1, 1, 1, 1], [1, 1, 2], [1, 2, 1], [1, 3], [2, 1, 1], [2, 2], [3, 1]]
