@@ -59,6 +59,8 @@ def get_longest_sub_with_k_dist(s, k):
         high += 1
 
 
+    return s[begin: end + 1]
+
 assert get_longest_sub_with_k_dist("abcba", 2) == "bcb"
 assert get_longest_sub_with_k_dist("abccbba", 2) == "bccbb"
 assert get_longest_sub_with_k_dist("abcbbbabbcbbadd", 2) == "bbbabb"
